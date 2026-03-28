@@ -7,7 +7,7 @@ load_dotenv()
 
 from routes import analyze
 
-app = FastAPI(title="AI Health Guardian API", version="1.0.0")
+app = FastAPI(title="Swasthya AI API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -21,7 +21,7 @@ app.include_router(analyze.router, prefix="/api")
 
 @app.get("/")
 def read_root():
-    return {"status": "ok", "message": "AI Health Guardian Backend is running."}
+    return {"status": "ok", "message": "Swasthya AI Backend is running."}
 
 if __name__ == "__main__":
     import uvicorn
