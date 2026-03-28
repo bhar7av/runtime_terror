@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SwastyaAI — Intelligent Health Triage</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+
+</head>
+<body>
+
+<!-- MENTAL MODAL -->
+<div class="mental-modal-bg" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="mental-modal">
+    <div class="mental-modal-close" onclick="document.querySelector('.mental-modal-bg').classList.remove('open')">✕</div>
+    <div class="modal-breathing">🫁</div>
+    <div class="modal-title">You're not alone.</div>
+    <div class="modal-sub">Our AI is here to listen and support you. Let's take a breath together and figure out your next step.</div>
+    <div class="coping-list">
+      <div class="coping-item"><span>🌬️</span><span>Try a 4-7-8 breathing exercise to calm your nervous system</span></div>
+      <div class="coping-item"><span>🤝</span><span>Reach out to someone you trust — a friend, family member, or counselor</span></div>
+      <div class="coping-item"><span>📱</span><span>iCall Helpline: 9152987821 — free, confidential support</span></div>
+      <div class="coping-item"><span>💬</span><span>Talk to our AI assistant — describe how you're feeling right now</span></div>
+    </div>
+    <div class="modal-disclaimer">⚠️ SwastyaAI provides guidance and support — it is not a substitute for professional mental healthcare.</div>
+    <button class="modal-help-btn">Talk to the AI assistant →</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="dot"></div>
+    SwastyaAI
+  </div>
+  <div class="nav-links">
+    <a href="#chat">Triage</a>
+    <a href="#severity">Severity</a>
+    <a href="#map">Doctors</a>
+  </div>
+  <div class="nav-right">
+    <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()" title="Switch to light mode">🌙</button>
+    <button class="btn btn-mental" style="padding:7px 14px;font-size:12px" onclick="document.querySelector('.mental-modal-bg').classList.add('open')">
+      🧠 I'm feeling low
+    </button>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-badge"><span>●</span> Multi-agent AI · Real-time triage</div>
+  <h1>
+Health triage that <em>thinks</em><br>
+like a doctor
+</h1>
+  <p class="hero-sub">Describe your symptoms, upload an image, and let our AI agents assess severity, suggest first aid, and find nearby care — instantly.</p>
+  <div class="hero-actions">
+    <a href="#chat" class="btn btn-primary">Start health check ↓</a>
+    <button class="btn btn-mental" onclick="document.querySelector('.mental-modal-bg').classList.add('open')">🧠 Mental wellness</button>
+    <a href="#map" class="btn btn-ghost">Find doctors →</a>
+  </div>
+  <div class="severity-strip">
+    <div class="sev-item"><div class="sev-dot safe"></div>SAFE — monitor at home</div>
+    <div class="sev-item"><div class="sev-dot warn"></div>ATTENTION — see a doctor</div>
+    <div class="sev-item"><div class="sev-dot crit"></div>CRITICAL — seek emergency care</div>
+  </div>
+</div>
+
+<!-- CHAT -->
+<section id="chat">
+  <div class="section-label">02 — Health assistant</div>
+  <div class="section-title">Describe what you're experiencing</div>
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="chat-header-left">
+        <div class="chat-avatar">🤖</div>
+        <div>
+          <div class="chat-name">SwastyaAI Assistant</div>
+          <div class="chat-status">Online · multi-agent active</div>
+        </div>
+      </div>
+      <button class="mental-btn-sm" onclick="document.querySelector('.mental-modal-bg').classList.add('open')">🧠 Feeling stressed?</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg ai">
+        <div class="msg-avatar">🤖</div>
+        <div><div class="msg-bubble">Hello! I'm your SwastyaAI health assistant. Tell me what symptoms you're experiencing, upload an image if relevant, and I'll assess your situation. <strong>How can I help you today?</strong></div></div>
+      </div>
+      <div class="msg user">
+        <div class="msg-avatar">U</div>
+        <div class="msg-bubble">I've had a bad headache for 2 days with fever around 101°F and some neck stiffness</div>
+      </div>
+      <div class="msg ai">
+        <div class="msg-avatar">🤖</div>
+        <div>
+          <div class="msg-bubble">I'm analyzing your symptoms across multiple agents…</div>
+          <div class="severity-card crit" style="margin-top:10px">
+            <div class="sev-icon">🔴</div>
+            <div>
+              <div class="sev-label">Critical — seek emergency care</div>
+              <div class="sev-desc">Headache + high fever + neck stiffness can indicate meningitis. <strong>Please go to an emergency room immediately</strong> or call emergency services. Do not wait.</div>
+            </div>
+          </div>
+          <div class="msg-bubble" style="margin-top:10px;font-size:13px">First aid while you travel: stay hydrated, avoid bright lights, and do not take ibuprofen without medical advice. Confidence score: <strong>94%</strong></div>
+        </div>
+      </div>
+      <div class="msg user">
+        <div class="msg-avatar">U</div>
+        <div class="msg-bubble">What if it's just a tension headache?</div>
+      </div>
+      <div class="msg ai">
+        <div class="msg-avatar">🤖</div>
+        <div><div class="msg-bubble">Tension headaches don't typically cause neck stiffness or fever. The combination of all three symptoms is what raises concern. The safety evaluation agent confirms — please seek emergency care.</div></div>
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <button class="attach-btn" title="Upload image">📎</button>
+      <textarea class="chat-input" placeholder="Describe your symptoms…" rows="1" id="chatInput" onkeydown="handleChatKey(event)"></textarea>
+      <button class="send-btn" onclick="sendMessage()">↑</button>
+    </div>
+  </div>
+
+  <div style="margin-top:32px">
+    <div class="section-label" style="margin-bottom:12px">Upload a photo (skin, wound, eye, etc.)</div>
+    <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+      <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileUpload(event)"/>
+      <div class="upload-icon">🖼️</div>
+      <div class="upload-text">
+        <strong>Drag &amp; drop or click to upload</strong>
+        Vision AI will analyze rashes, wounds, eye conditions, and more
+      </div>
+      <div class="upload-hint">JPG · PNG · WEBP · max 10MB</div>
+    </div>
+    <div id="uploadPreview" style="display:none;margin-top:16px;text-align:center">
+      <img id="uploadedImg" style="max-width:100%;max-height:200px;border-radius:var(--radius-lg);border:1px solid var(--border2)"/>
+      <div style="margin-top:10px;font-size:13px;color:var(--text2)">✅ Image received — Vision agent analyzing…</div>
+    </div>
+  </div>
+</section>
+
+<!-- SEVERITY -->
+<section id="severity">
+  <div class="section-label">03 — Severity system</div>
+  <div class="section-title">AI-powered risk classification</div>
+  <div class="severity-grid">
+    <div class="sev-card-big safe">
+      <div class="sev-card-glow"></div>
+      <div class="sev-num">🟢 Safe</div>
+      <div class="sev-title">Monitor at home</div>
+      <div class="sev-desc-big">Symptoms are mild and unlikely to require urgent care. AI recommends rest, hydration, and over-the-counter relief as needed.</div>
+      <div class="sev-examples">
+        <span class="sev-tag">mild cold</span><span class="sev-tag">minor bruise</span>
+        <span class="sev-tag">low-grade fever</span><span class="sev-tag">sore throat</span>
+      </div>
+    </div>
+    <div class="sev-card-big warn">
+      <div class="sev-card-glow"></div>
+      <div class="sev-num">🟡 Attention</div>
+      <div class="sev-title">See a doctor soon</div>
+      <div class="sev-desc-big">Symptoms warrant a doctor's visit within 24–48 hours. AI recommends booking an appointment and monitoring closely.</div>
+      <div class="sev-examples">
+        <span class="sev-tag">persistent fever</span><span class="sev-tag">infected wound</span>
+        <span class="sev-tag">moderate pain</span><span class="sev-tag">rash spreading</span>
+      </div>
+    </div>
+    <div class="sev-card-big crit">
+      <div class="sev-card-glow"></div>
+      <div class="sev-num">🔴 Critical</div>
+      <div class="sev-title">Emergency care now</div>
+      <div class="sev-desc-big">Symptoms suggest a potentially life-threatening condition. Go to the emergency room immediately or call emergency services.</div>
+      <div class="sev-examples">
+        <span class="sev-tag">chest pain</span><span class="sev-tag">difficulty breathing</span>
+        <span class="sev-tag">loss of consciousness</span><span class="sev-tag">stroke signs</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section id="map">
+  <div class="section-label">04 — Nearby care</div>
+  <div class="section-title">Find the right doctor for you</div>
+  <div class="map-layout">
+    <div class="map-placeholder">
+      <div class="map-pin" style="top:30%;left:45%">📍</div>
+      <div class="map-pin" style="top:55%;left:30%;font-size:16px;filter:drop-shadow(0 0 6px rgba(245,184,0,0.6))">📍</div>
+      <div class="map-pin" style="top:40%;left:65%;font-size:16px;filter:drop-shadow(0 0 6px rgba(255,61,90,0.5))">📍</div>
+      <div class="map-overlay-label">MAP INTEGRATION — Apify + Google Maps</div>
+      <div class="center-text">
+        <div style="font-size:28px;margin-bottom:8px">🗺️</div>
+        Live map renders here<br/>based on user location
+      </div>
+    </div>
+    <div class="doctor-list">
+      <div class="doctor-card active">
+        <div class="doc-name">Dr. Priya Nair</div>
+        <div class="doc-spec">General Physician · 0.8 km</div>
+        <div class="doc-meta">⭐ 4.9 &nbsp;<span class="doc-open">Open now</span></div>
+      </div>
+      <div class="doctor-card">
+        <div class="doc-name">City Emergency Clinic</div>
+        <div class="doc-spec">Emergency / Urgent Care · 1.2 km</div>
+        <div class="doc-meta">⭐ 4.7 &nbsp;<span class="doc-open">Open now</span></div>
+      </div>
+      <div class="doctor-card">
+        <div class="doc-name">Dr. Ramesh Iyer</div>
+        <div class="doc-spec">Internal Medicine · 1.8 km</div>
+        <div class="doc-meta">⭐ 4.8 &nbsp;<span style="font-size:10px;padding:2px 8px;border-radius:4px;background:var(--warn-bg);color:var(--warn);border:1px solid var(--warn-border);font-family:'DM Mono',monospace">By appt</span></div>
+      </div>
+      <div class="doctor-card">
+        <div class="doc-name">Apollo Hospital</div>
+        <div class="doc-spec">Multi-speciality · 3.1 km</div>
+        <div class="doc-meta">⭐ 4.9 &nbsp;<span class="doc-open">24/7</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>SwastyaAI — AI Health Triage System · Hackathon Build</span>
+  <span>⚠️ Not a substitute for professional medical advice</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</body>
+</html>
